@@ -1,0 +1,2 @@
+buildNumber: BuildNumber
+imagePullSecret: acr

@@ -1,0 +1,24 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: nodeapi
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nodeapi
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: nodeapi
+          image: "rzdockerregistry.azurecr.io/nodeapi:{{.Values.buildNumber}}"
+          env:
+            - name: url
+              value: https://rzshared.blob.core.windows.net/data
+          ports:
+            - name: http
+              containerPort: 8080
+      imagePullSecrets:
+        - name: {{.Values.imagePullSecret}}

@@ -1,0 +1,35 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: demowebapp
+spec:
+  selector:
+    app: aspcoreweb
+    tier: frontend
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: aspcoreweb
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: aspcoreweb
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+        - name: demowebapp
+          image: "rzdockerregistry.azurecr.io/aspcoreweb:BuildNumber"
+          ports:
+            - name: http
+              containerPort: 80
+      imagePullSecrets:
+        - name: sec

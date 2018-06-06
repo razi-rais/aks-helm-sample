@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  aspcoreweb:
+    image: rzdockerregistry.azurecr.io/aspcoreweb:BuildNumber
+    ports:
+      - 80:80
+    depends_on:
+      - nodeapi
+  nodeapi:
+    image: rzdockerregistry.azurecr.io/nodeapi:BuildNumber
+    ports:
+      - 8080:8080
+    environment:
+     - url=https://rzshared.blob.core.windows.net/data

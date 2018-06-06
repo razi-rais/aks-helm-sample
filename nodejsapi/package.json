@@ -1,0 +1,14 @@
+{
+  "name": "web_api",
+  "version": "1.0.0",
+  "description": "Web Api",
+  "author": "Razi Rais",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "request": "^2.81.0"
+  }
+}

@@ -1,0 +1,24 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-aspcoreweb-dep
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: aspcoreweb
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+        - name: demowebapp
+          image: "rzdockerregistry.azurecr.io/aspcoreweb:{{.Values.buildNumber}}"
+          ports:
+            - name: http
+              containerPort: 80
+          env:
+            - name: BackEndSvc
+              value: {{ .Release.Name }}-nodeapi-svc
+      imagePullSecrets:
+        - name: {{.Values.imagePullSecret}}
