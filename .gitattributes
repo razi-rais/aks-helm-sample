@@ -1,0 +1,6 @@
+* linguist-vendored
+*.js linguist-vendored=nodejs
+*.cs linguist-vendored=false
+*.cs diff=csharp
+*.csproj merge=union
+*.sln merge=union
